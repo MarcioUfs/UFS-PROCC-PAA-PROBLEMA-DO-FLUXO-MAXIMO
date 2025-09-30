@@ -13,8 +13,75 @@ Edmonds e Karp, em 1972, aprimoraram a estratégia, substituindo a escolha arbit
 
 Exemplo do uso da busca em largura, onde a primeira elipse é o ponto inicial da busca em 's', partindo para seus vizinhos 'a' e 'b', seguindo para 'c' e por ultimo chegando a 't', percorrendo todos os caminhos possiveis. 
 # PROBLEMA
-O problema consiste em encontrar o fluxo máximo no código fonte abaixo.  
+O problema consiste em encontrar o fluxo máximo no código fonte abaixo. A matriz contida na linha 65 do codigo fonte
+grafo = [
+    [0, 16, 13, 0, 0, 0],
+    [0, 0, 10, 12, 0, 0],
+    [0, 4, 0, 0, 14, 0],
+    [0, 0, 9, 0, 0, 20],
+    [0, 0, 0, 7, 0, 4],
+    [0, 0, 0, 0, 0, 0],
+] 
+Tem sua representação em grafo como mostra a figura abaixo:
+
 # RESOLUÇÃO
 O algoritmo de Ford-Fulkerson pode levar até M iterações (fluxo aumenta pelo menos 1 unidade por iteração) então sua complexidade será O(M.|E|), ou seja, número de iterações vezes o número de arestas, isto pode se tornar complexo dependendo do número e peso das arestas e isso pode impactar na resolução do problema. Partindo desse raciocínio será utilizado o algoritmo de Edmonds-Karp por ser um melhoramento pois o mesmo obtém a caminho de comprimento mínimo atraves de BFS (busca em largura) com a complexidade O(|E|^2|V|) quadrado do número de arestas vezes o número de vértices.
 # CÓDIGO FONTE
 
+```
+from collections import deque
+
+def bfs(residual, origem, destino, caminho):
+    visitado = [False] * len(residual)
+    fila = deque([origem])
+    visitado[origem] = True
+
+    while fila:
+        u = fila.popleft()
+        for v, capacidade in enumerate(residual[u]):
+            if not visitado[v] and capacidade > 0:
+                visitado[v] = True
+                caminho[v] = u
+                if v == destino:
+                    return True
+                fila.append(v)
+    return False
+
+def edmonds_karp(grafo, origem, destino):
+    n = len(grafo)
+    residual = [linha[:] for linha in grafo]
+    caminho = [-1] * n
+    fluxo_maximo = 0
+
+    while bfs(residual, origem, destino, caminho):
+        fluxo = float("inf")
+        v = destino
+        while v != origem:
+            u = caminho[v]
+            fluxo = min(fluxo, residual[u][v])
+            v = caminho[v]
+
+        v = destino
+        while v != origem:
+            u = caminho[v]
+            residual[u][v] -= fluxo
+            residual[v][u] += fluxo
+            v = caminho[v]
+
+        fluxo_maximo += fluxo
+
+    return fluxo_maximo
+
+grafo = [
+    [0, 16, 13, 0, 0, 0],
+    [0, 0, 10, 12, 0, 0],
+    [0, 4, 0, 0, 14, 0],
+    [0, 0, 9, 0, 0, 20],
+    [0, 0, 0, 7, 0, 4],
+    [0, 0, 0, 0, 0, 0],
+]
+origem = 0
+destino = 5
+
+print("Fluxo máximo:", edmonds_karp(grafo, origem, destino))
+```
