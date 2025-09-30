@@ -9,9 +9,11 @@ O problema do fluxo máximo é uma ferramenta de modelagem capaz de apresentar u
 O grafo acima representa um exemplo simples, onde 's' e 't' são respectivamente o inicio e o fim e os vértices 'a', 'b' e 'c' são as junções (conexões), as setas indicam o sentido, ou seja, partindo de 's' até 'a' sendo 10 o valor do fluxo, note que 'a' recebe fluxo de 's' e 'c' e "repassa" esse valor para 't' num total de 13 que trata-se da soma dos valores recebidos por 'a'.
 
 Edmonds e Karp, em 1972, aprimoraram a estratégia, substituindo a escolha arbitrária de caminhos por busca em largura (BFS).
+![Imagem grafo BFS](https://github.com/MarcioUfs/UFS-PROCC-PAA-PROBLEMA-DO-FLUXO-MAXIMO/blob/main/2-BFSGrafoEdmondsKarp.png)
 
+Exemplo do uso da busca em largura, onde a primeira elipse é o ponto inicial da busca em 's', partindo para seus vizinhos 'a' e 'b', seguindo para 'c' e por ultimo chegando a 't', percorrendo todos os caminhos possiveis. 
 # PROBLEMA
-
+O problema consiste em encontrar o fluxo máximo no código fonte abaixo.
 # RESOLUÇÃO
 # CÓDIGO FONTE
 
