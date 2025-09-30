@@ -97,3 +97,8 @@ destino = 5
 
 print("Fluxo máximo:", edmonds_karp(grafo, origem, destino))
 ```
+
+# LINK
+
+Segue link para video no Youtube
+[Problema do fluxo máximo](https://youtu.be/RDF_pgugFek)
