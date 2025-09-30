@@ -34,7 +34,8 @@ Tem sua representação em grafo como mostra a figura abaixo:
 # RESOLUÇÃO
 
 O algoritmo de Ford-Fulkerson pode levar até M iterações (fluxo aumenta pelo menos 1 unidade por iteração) então sua complexidade será O(M.|E|), ou seja, número de iterações vezes o número de arestas, isto pode se tornar complexo dependendo do número e peso das arestas e isso pode impactar na resolução do problema, partindo desse raciocínio será utilizado o algoritmo de Edmonds-Karp por ser um melhoramento o mesmo obtém a caminho de comprimento mínimo atraves de BFS (busca em largura) com a complexidade O(|E|^2|V|) quadrado do número de arestas vezes o número de vértices.
-Após 
+
+Resultado das iterações do algoritmo de Edmonds-Karp 
 ![Imagem resultado iterações codigo fonte](https://github.com/MarcioUfs/UFS-PROCC-PAA-PROBLEMA-DO-FLUXO-MAXIMO/blob/main/4-resultdoIteracoesCodigoFonte.png)
 
 # CÓDIGO FONTE
